@@ -6,3 +6,51 @@
   -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+body {
+  font-family: Raleway, Verdana, sans-serif;
+  background: #f0f0f0;
+}
+
+.grs-main {
+  max-width: 960px;
+  margin: 40px auto 0;
+}
+
+.grs-box {
+  padding: 20px;
+  background: #fff;
+}
+
+.grs-label-text {
+  display: none;
+}
+
+.grs-input-search {
+  background: none;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  height: 120px;
+  margin-bottom: 20px;
+  font-size: 80px;
+  outline: none;
+}
+
+.grs-input-search::-webkit-input-placeholder {
+  font-size: 80px;
+}
+
+ /* Firefox 18- */
+.grs-input-search:-moz-placeholder {
+  font-size: 80px;
+}
+
+/* Firefox 19+ */
+.grs-input-search::-moz-placeholder {
+  font-size: 80px;
+}
+
+.grs-input-search:-ms-input-placeholder {
+  font-size: 80px;
+}
