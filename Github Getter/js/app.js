@@ -8,25 +8,58 @@ githubSearchRepo = (function($) {
 
   function init() {
     bindInput();
-    searchRepo();
   }
 
   function bindInput() {
-    $("#search").focus();
+    var $input = $("#search");
+    var searchDelay = (function(){
+      var timer = 0;
+      return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+      };
+    })();
+
+    $input.focus();
+    $input.on('keyup', function(e) {
+
+      searchDelay(function(){
+        // Set search string
+        var searchString = $input.val();
+        // if(searchString.length >= 3){
+        //   searchRepo(searchString);
+        // };
+        // return false;
+        console.log(searchString)
+      }, 1000 );
+    });
   }
 
-  function searchRepo() {
-    $.ajax({
-      url: "https://api.github.com/search/repositories?q=wylkon",
-      context: document.body
-    }).done(function(data) {
+  function searchRepo(searchString) {
+    var request = $.ajax({
+      url: "https://api.github.com/search/repositories?q="+searchString,
+      // url: "http://gdata.youtube.com/feeds/api/standardfeeds/most_popular?v=2&alt=json",
+      cache: true,
+      dataType: "jsonp",
+      ifModified: true
+    });
+
+    request.done( function(data) {
+      console.log('teste')
       updateTotalCount(data.total_count);
     });
   }
 
   function updateTotalCount(totalCount) {
+    var $containerResults = $("#results-container");
+
     totalCount = totalCount > 1 ? totalCount+" results" : totalCount+" result";
-    $("#results-container").addClass('gg-has-result').append("<p>Your search found <strong>"+totalCount+"</strong>.</p>");
+
+    if($containerResults.hasClass('gg-has-result')) {
+      $containerResults.find("p").html("<p>Your search found <strong>"+totalCount+"</strong>.</p>");
+    } else {
+      $containerResults.addClass('gg-has-result').append("<p>Your search found <strong>"+totalCount+"</strong>.</p>");
+    }
   }
 
   return {
