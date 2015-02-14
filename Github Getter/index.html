@@ -14,8 +14,21 @@
   <script src="js/app.js"></script>
 </head>
 <body>
-  <input id="search" type="text"/>
-  <div id="results-container"></div>
-  <div id="overlay-container"></div>
+  <!-- ************************* -->
+  <!-- Github repository search  -->
+  <!-- ************************* -->
+
+  <!-- Main container -->
+  <div class="grs-main">
+
+    <!-- Search repository -->
+    <label class="grs-label">
+      <span class="grs-label-text">Search Repository</span>
+      <input id="search" type="text" placeholder="Search Repository" class="grs-input-search">
+    </label>
+
+    <div id="results-container" class="grs-box"></div>
+    <div id="overlay-container"></div>
+  </div>
 </body>
 </html>
