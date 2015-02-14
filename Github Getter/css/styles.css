@@ -1,4 +1,5 @@
-@import url("http://fonts.googleapis.com/css?family=Raleway:500,700")
+@import url("http://fonts.googleapis.com/css?family=Raleway:500,700");
+@import url("mobile-styles.css");
 
 * {
   -webkit-box-sizing: border-box;
@@ -7,50 +8,86 @@
   box-sizing: border-box;
 }
 
+/* Structure */
+
 body {
   font-family: Raleway, Verdana, sans-serif;
-  background: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
-.grs-main {
+.gg-container {
   max-width: 960px;
-  margin: 40px auto 0;
+  margin: 0 auto;
 }
 
-.grs-box {
+.gg-header {
+  background-color: #22313F;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.gg-header h1 {
+  color: #fff;
+}
+
+.gg-box {
   padding: 20px;
   background: #fff;
+  opacity: 0;
+  position: relative;
+  -webkit-transform: translateY(-100px);
+  -ms-transform: translateY(-100px);
+  -moz-transform: translateY(-100px);
+  transform: translateY(-100px);
+
+  -webkit-transition: opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  -ms-transition: opacity .2s ease-in-out, -ms-transform .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out, -moz-transform .2s ease-in-out;
+  transition: opacity .2s ease-in-out, transform .2s ease-in-out;
 }
 
-.grs-label-text {
-  display: none;
+.gg-has-result {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -moz-transform: translateY(0);
+  transform: translateY(0);
+
+  opacity: 1;
 }
 
-.grs-input-search {
-  background: none;
+.gg-label-text {
+  font-size: 20px;
+  line-height: 2em;
+}
+
+.gg-input-search {
+  background: #fff;
   width: 100%;
   border: none;
-  border-bottom: 2px solid #ccc;
-  height: 120px;
   margin-bottom: 20px;
-  font-size: 80px;
+  font-size: 40px;
   outline: none;
+  padding: 20px;
 }
 
-.grs-input-search::-webkit-input-placeholder {
+.gg-input-search::-webkit-input-placeholder {
   font-size: 80px;
 }
 
- /* Firefox 18- */
-.grs-input-search:-moz-placeholder {
+.gg-input-search:-moz-placeholder {
   font-size: 80px;
 }
 
-/* Firefox 19+ */
-.grs-input-search::-moz-placeholder {
+.gg-input-search::-moz-placeholder {
   font-size: 80px;
 }
 
-.grs-input-search:-ms-input-placeholder {
+.gg-input-search:-ms-input-placeholder {
   font-size: 80px;
+}
+
+/* Titles */
+.gg-title-1 {
+  font-size: 30px;
+  font-weight: 700;
 }
