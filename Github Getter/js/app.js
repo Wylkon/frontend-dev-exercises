@@ -7,9 +7,27 @@ githubSearchRepo = (function($) {
   'use strict';
 
   function init() {
-
+    bindInput();
+    searchRepo();
   }
 
+  function bindInput() {
+    $("#search").focus();
+  }
+
+  function searchRepo() {
+    $.ajax({
+      url: "https://api.github.com/search/repositories?q=wylkon",
+      context: document.body
+    }).done(function(data) {
+      updateTotalCount(data.total_count);
+    });
+  }
+
+  function updateTotalCount(totalCount) {
+    totalCount = totalCount > 1 ? totalCount+" itens" : totalCount+" item";
+    $("#results-container").append("<p>This search return <strong>"+totalCount+"</strong>.</p>");
+  }
 
   return {
     init: init
@@ -17,7 +35,7 @@ githubSearchRepo = (function($) {
 
 }(jQuery));
 
-$(document).ready( function (argument) {
+$(document).ready( function() {
   githubSearchRepo.init();
 });
 
