@@ -1,12 +1,35 @@
+//
+// Revealing module pattern - https://carldanley.com/js-revealing-module-pattern/
+//
+var githubSearchRepo = githubSearchRepo || {};
+
+githubSearchRepo = (function($) {
+  'use strict';
+
+  function init() {
+
+  }
+
+
+  return {
+    init: init
+  };
+
+}(jQuery));
+
+$(document).ready( function (argument) {
+  githubSearchRepo.init();
+});
+
 /*
     # Endpoint URL #
-    
+
     https://api.github.com/legacy/repos/search/{query}
-    
+
     Note: Github imposes a rate limit of 60 request per minute. Documentation can be found at http://developer.github.com/v3/.
-    
+
     # Example Response JSON #
-    
+
     {
       "meta": {...},
       "data": {
