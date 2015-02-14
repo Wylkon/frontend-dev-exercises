@@ -1,0 +1,6 @@
+@media all and (max-width: 1000px){
+  .gg-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
