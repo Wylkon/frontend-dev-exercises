@@ -25,8 +25,8 @@ githubSearchRepo = (function($) {
   }
 
   function updateTotalCount(totalCount) {
-    totalCount = totalCount > 1 ? totalCount+" itens" : totalCount+" item";
-    $("#results-container").append("<p>This search return <strong>"+totalCount+"</strong>.</p>");
+    totalCount = totalCount > 1 ? totalCount+" results" : totalCount+" result";
+    $("#results-container").addClass('gg-has-result').append("<p>Your search found <strong>"+totalCount+"</strong>.</p>");
   }
 
   return {
