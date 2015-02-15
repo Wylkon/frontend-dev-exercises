@@ -25,8 +25,8 @@ githubSearchRepo = (function($) {
     // Set Focus to input
     $input.focus();
 
-    // When keyup, initiate search
-    $input.on('keypress', function(e) {
+    // When keydown, initiate search
+    $input.on('keydown', function(e) {
       searchDelay(function(){
 
         // Set search string
@@ -50,7 +50,7 @@ githubSearchRepo = (function($) {
       implementRepositoryList(actualSearch['repositories']);
     } else {
       var request = $.ajax({
-        url: "https://api.github.com/legacy/repos/search/"+searchString,
+        url: "https://api.github.com/legacy/repos/search/"+encodeURI(searchString),
         dataType: "json",
         beforeSend: function () {
           $containerResults.addClass('gg-loading');
@@ -59,22 +59,33 @@ githubSearchRepo = (function($) {
       });
 
       request.done( function(result) {
-        // Put the object into storage
-        localStorage.setItem(searchString, JSON.stringify(result));
 
-        $containerResults.removeClass('gg-loading');
-        implementRepositoryList(result['repositories']);
+        var checkResult = $.isEmptyObject(result['repositories']);
+
+        if(checkResult) {
+          $("#results-container p").remove();
+          $("#results-container").append("<p>Your search did not match any results.</p>");
+          $containerResults.removeClass('gg-loading');
+          $containerResults.addClass('gg-has-result');
+        } else {
+          $("#results-container p").remove();
+          // Put the object into storage
+          localStorage.setItem(searchString, JSON.stringify(result));
+
+          $containerResults.removeClass('gg-loading');
+          implementRepositoryList(result['repositories']);
+        }
       });
     }
   }
 
   function removeRepositoryList(){
-    var $containerResults = $("#results-container ul").html("");
+    $("#results-container ul").html("");
   }
 
   function implementRepositoryList(result) {
     var $containerResults = $("#results-container");
-    $containerResults.addClass('gg-has-result')
+    $containerResults.addClass('gg-has-result');
 
     $.each(result, function() {
       var repositoryTemplate = "<li><a href='#'>"+this.name+" <span>by: <strong>"+this.owner+"</strong><span></a></li>"
@@ -128,41 +139,3 @@ githubSearchRepo = (function($) {
 $(document).ready( function() {
   githubSearchRepo.init();
 });
-
-/*
-    # Endpoint URL #
-
-    https://api.github.com/legacy/repos/search/{query}
-
-    Note: Github imposes a rate limit of 60 request per minute. Documentation can be found at http://developer.github.com/v3/.
-
-    # Example Response JSON #
-
-    {
-      "meta": {...},
-      "data": {
-        "repositories": [
-          {
-            "type": string,
-            "watchers": number,
-            "followers": number,
-            "username": string,
-            "owner": string,
-            "created": string,
-            "created_at": string,
-            "pushed_at": string,
-            "description": string,
-            "forks": number,
-            "pushed": string,
-            "fork": boolean,
-            "size": number,
-            "name": string,
-            "private": boolean,
-            "language": number
-          },
-          {...},
-          {...}
-        ]
-      }
-    }
-*/
