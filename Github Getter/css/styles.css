@@ -1,3 +1,5 @@
+/* Import is not a best practice */
+/* I prefer to work in separate files and when put into production, I compile the files into one and avoid many requests. */
 @import url("http://fonts.googleapis.com/css?family=Raleway:500,700");
 @import url("mobile-styles.css");
 
@@ -33,12 +35,12 @@ body {
 .gg-box {
   padding: 20px;
   background: #fff;
-  opacity: 0;
+  /*opacity: 0;*/
   position: relative;
-  -webkit-transform: translateY(-100px);
+  /*-webkit-transform: translateY(-100px);
   -ms-transform: translateY(-100px);
   -moz-transform: translateY(-100px);
-  transform: translateY(-100px);
+  transform: translateY(-100px);*/
 
   -webkit-transition: opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
   -ms-transition: opacity .2s ease-in-out, -ms-transform .2s ease-in-out;
@@ -46,13 +48,90 @@ body {
   transition: opacity .2s ease-in-out, transform .2s ease-in-out;
 }
 
-.gg-has-result {
+.gg-box ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.gg-box ul li {
+  width: 100%;
+  display: block;
+  overflow: hidden;
+  margin-bottom: 10px;
+  background-color: #4ECDC4;
+  opacity: .9;
+}
+
+.gg-box ul li:hover {
+  opacity: 1;
+}
+
+.gg-box ul li:nth-of-type(odd) {
+  background-color: #03C9A9;
+}
+
+.gg-box ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+  text-transform: capitalize;
+  font-size: 16px;
+  padding: 10px 20px;
+}
+
+.gg-box ul li a span {
+  float: right;
+  display: block;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #22313F;
+}
+
+.gg-has-result,
+.gg-loading {
   -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
   -moz-transform: translateY(0);
   transform: translateY(0);
 
   opacity: 1;
+}
+
+.gg-loading {
+  position: relative;
+}
+
+.gg-loading:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 5px;
+  background: #22313F;
+  -webkit-animation: loading 2s ease-in-out infinite;
+  -moz-animation:    loading 2s ease-in-out infinite;
+  -o-animation:      loading 2s ease-in-out infinite;
+  animation:         loading 2s ease-in-out infinite;
+}
+
+@-webkit-keyframes loading {
+  0%   { width: 0; opacity: 0;}
+  100% { width: 100%; opacity: 1;}
+}
+@-moz-keyframes loading {
+  0%   { width: 0; opacity: 0;}
+  100% { width: 100%; opacity: 1;}
+}
+@-o-keyframes loading {
+  0%   { width: 0; opacity: 0;}
+  100% { width: 100%; opacity: 1;}
+}
+@keyframes loading {
+  0%   { width: 0; opacity: 0;}
+  100% { width: 100%; opacity: 1;}
 }
 
 .gg-label-text {
@@ -68,6 +147,9 @@ body {
   font-size: 40px;
   outline: none;
   padding: 20px;
+  position: relative;
+  z-index: 2;
+  box-shadow: inset 0 0 0 2px #67809F;
 }
 
 .gg-input-search::-webkit-input-placeholder {
@@ -90,4 +172,73 @@ body {
 .gg-title-1 {
   font-size: 30px;
   font-weight: 700;
+}
+
+/* Modal */
+.gg-modal {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  width: 600px;
+  padding: 20px 20px 40px;
+  margin-left: -300px;
+  background-color: #fff;
+  z-index: 3;
+  box-shadow: 0 0 0 3000px rgba(0, 0, 0, .4);
+  overflow: hidden;
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -moz-transform: translateY(0);
+  transform: translateY(0);
+  opacity: 1;
+  -webkit-transition: opacity .2s ease-in-out, -webkit-transform .2s ease-in-out;
+  -ms-transition: opacity .2s ease-in-out, -ms-transform .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out, -moz-transform .2s ease-in-out;
+  transition: opacity .2s ease-in-out, transform .2s ease-in-out;
+}
+
+.gg-modal.gg-modal-closed {
+  -webkit-transform: translateY(-1000px);
+  -ms-transform: translateY(-1000px);
+  -moz-transform: translateY(-1000px);
+  transform: translateY(-1000px);
+
+  opacity: 0;
+}
+
+.gg-modal h1 {
+  margin-top: 0;
+}
+
+.gg-modal h1 small {
+  display: block;
+  font-size: 12px;
+}
+
+.gg-modal label:before {
+  content: attr(data-prefix);
+  display: inline-block;
+  width: 50px;
+  border: 2px solid #67809F;
+  background-color: #67809F;
+  padding: 10px;
+  color: #fff;
+}
+
+.gg-modal label input {
+  width: calc(100% - 74px);
+  margin-top: 20px;
+  border: 2px solid #67809F;
+  border-left: none;
+  background: #fff;
+  padding: 10px;
+}
+
+.gg-modal .gg-modal-close {
+  float: right;
+  background: #F89406;
+  padding: 5px;
+  font-size: 12px;
+  color: #fff;
+  text-decoration: none;
 }
