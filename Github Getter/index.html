@@ -14,10 +14,6 @@
   <script src="js/app.js"></script>
 </head>
 <body>
-  <!-- ************************* -->
-  <!-- Github repository search  -->
-  <!-- ************************* -->
-
   <header class="gg-header">
     <div class="gg-container">
       <h1 class="gg-title-1">Github Getter</h1>
@@ -29,11 +25,13 @@
     <!-- Search repository -->
     <label class="gg-label">
       <span class="gg-label-text">Type your search</span>
-      <input id="search" type="text" class="gg-input-search">
+      <input id="search" type="text" class="gg-input-search" autocomplete="off">
     </label>
 
-    <div id="results-container" class="gg-box"></div>
-    <div id="overlay-container"></div>
+    <div id="results-container" class="gg-box">
+      <ul></ul>
+    </div>
+    <div id="overlay-container" class="gg-modal gg-modal-closed"></div>
   </main>
 </body>
 </html>
